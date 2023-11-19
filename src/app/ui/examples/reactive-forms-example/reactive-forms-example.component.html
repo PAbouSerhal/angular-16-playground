@@ -2,7 +2,7 @@
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
   class="row g-3"
-  (keyup)="onSubmit()"
+  (keyup)="onFormControlKeyUp()"
 >
   <div class="col-md-6">
     <label>Full Name</label>
@@ -11,11 +11,11 @@
       formControlName="fullname"
       class="form-control is-invalid"
       [ngClass]="{
-        'is-invalid': submitted && f['fullname'].errors
+        'is-invalid': isUserInteraction && f['fullname'].errors
       }"
       (keyup)="onFullnameKeyUp()"
     />
-    <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
+    <div *ngIf="isUserInteraction && f['fullname'].errors" class="invalid-feedback">
       <div *ngIf="f['fullname'].errors['required']">Fullname is required</div>
     </div>
   </div>
@@ -26,9 +26,9 @@
       type="text"
       formControlName="username"
       class="form-control"
-      [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+      [ngClass]="{ 'is-invalid': isUserInteraction && f['username'].errors }"
     />
-    <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+    <div *ngIf="isUserInteraction && f['username'].errors" class="invalid-feedback">
       <div *ngIf="f['username'].errors['required']">Username is required</div>
       <div *ngIf="f['username'].errors['minlength']">
         Username must be at least 6 characters
@@ -45,9 +45,9 @@
       type="text"
       formControlName="email"
       class="form-control"
-      [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      [ngClass]="{ 'is-invalid': isUserInteraction && f['email'].errors }"
     />
-    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+    <div *ngIf="isUserInteraction && f['email'].errors" class="invalid-feedback">
       <div *ngIf="f['email'].errors['required']">Email is required</div>
       <div *ngIf="f['email'].errors['email']">Email is invalid</div>
     </div>
@@ -59,9 +59,9 @@
       type="password"
       formControlName="password"
       class="form-control"
-      [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+      [ngClass]="{ 'is-invalid': isUserInteraction && f['password'].errors }"
     />
-    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+    <div *ngIf="isUserInteraction && f['password'].errors" class="invalid-feedback">
       <div *ngIf="f['password'].errors['required']">Password is required</div>
       <div *ngIf="f['password'].errors['minlength']">
         Password must be at least 6 characters
@@ -78,10 +78,10 @@
       type="password"
       formControlName="confirmPassword"
       class="form-control"
-      [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+      [ngClass]="{ 'is-invalid': isUserInteraction && f['confirmPassword'].errors }"
     />
     <div
-      *ngIf="submitted && f['confirmPassword'].errors"
+      *ngIf="isUserInteraction && f['confirmPassword'].errors"
       class="invalid-feedback"
     >
       <div *ngIf="f['confirmPassword'].errors['required']">
@@ -98,13 +98,13 @@
         type="checkbox"
         formControlName="acceptTerms"
         class="form-check-input"
-        [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }"
+        [ngClass]="{ 'is-invalid': isUserInteraction && f['acceptTerms'].errors }"
       />
       <label for="acceptTerms" class="form-check-label"
         >I have read and agree to the Terms</label
       >
       <div
-        *ngIf="submitted && f['acceptTerms'].errors"
+        *ngIf="isUserInteraction && f['acceptTerms'].errors"
         class="invalid-feedback"
       >
         Accept Terms is required

@@ -27,7 +27,7 @@ export class ReactiveFormsExampleComponent implements OnInit {
     acceptTerms: new FormControl(false),
   });
 
-  submitted = false;
+  isUserInteraction = false;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -66,14 +66,19 @@ export class ReactiveFormsExampleComponent implements OnInit {
     return this.form.controls;
   }
 
+  onFormControlKeyUp(): void {
+    this.isUserInteraction = true;
+  }
+
   onSubmit(): void {
-    this.submitted = true;
+    this.isUserInteraction = true;
 
     if (this.form.invalid) {
       return;
     }
 
     console.log(JSON.stringify(this.form.value, null, 2));
+    // Do an API call or what ever...
   }
 
   onFullnameKeyUp(): void {
@@ -86,7 +91,7 @@ export class ReactiveFormsExampleComponent implements OnInit {
   }
 
   onReset(): void {
-    this.submitted = false;
+    this.isUserInteraction = false;
     this.form.reset();
   }
 }
