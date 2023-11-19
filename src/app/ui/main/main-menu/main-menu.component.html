@@ -1,0 +1,18 @@
+<table class="table table-hover" *ngIf="weatherForecastArray.length > 0">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Temprature in C</th>
+      <th scope="col">Temprature in F</th>
+      <th scope="col">Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of weatherForecastArray">
+      <td>{{ item.date }}</td>
+      <td>{{ item.temperatureC }}</td>
+      <td>{{ item.temperatureF }}</td>
+      <td>{{ item.summary }}</td>
+    </tr>
+  </tbody>
+</table>
